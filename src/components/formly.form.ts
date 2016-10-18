@@ -71,8 +71,9 @@ export class FormlyForm implements OnInit  {
 
       if (field.fieldGroup) {
         if (field.key) {
+          const nestedModel = model[field.key] || {};
           const nestedForm = new FormGroup({}, field.validation);
-          const nestedModel = model[field.key];
+          nestedForm.setValue(nestedModel);
           form.addControl(field.key, nestedForm, nestedModel);
           this.registerFormControls(field.fieldGroup, nestedForm, nestedModel);
         } else {
